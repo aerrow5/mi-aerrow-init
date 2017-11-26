@@ -1,0 +1,62 @@
+#!/usr/bin/bash
+#
+# Put customizations to your image in this file.
+
+PATH=/opt/local/gnu/bin:/opt/local/bin:/opt/local/sbin:/usr/bin:/usr/sbin
+
+# Munin plugins
+MUNIN_PLUGIN_VERSION='0.12'
+MUNIN_PLUGINS="
+	cert_expire
+	cputime
+	df
+	load
+	uptime
+	users
+	proc_state
+	vfs_bytes
+	vfs_iops
+	vfs_latency
+	if_net0
+	pkg_audit
+	memory_cap
+	swap_cap
+	smf
+	tcp
+	udp
+"
+
+echo "* Use the skylime pkgsrc mirror"
+gsed -i 's:pkgsrc.joyent.com:pkgsrc.smartos.skylime.net:g' /opt/local/etc/pkgin/repositories.conf
+gsed -i 's:pkgsrc.joyent.com:pkgsrc.smartos.skylime.net:g' /opt/local/etc/pkg_install.conf
+pkg_admin rebuild
+pkgin -y up
+
+## MUNIN
+echo "* Create munin template file that will be used during mdata setup"
+cp /opt/local/etc/munin/munin-node.conf /opt/local/etc/munin/munin-node.conf.tpl
+
+echo "* Download and install community munin plugins (overwrite all other plugins)"
+curl -L https://github.com/drscream/smartos-munin-plugins/archive/v${MUNIN_PLUGIN_VERSION}.tar.gz | gtar xz -C /opt/local/lib/munin/plugins --strip-components=1
+
+echo "* Activate munin plugins"
+/opt/core/bin/munin-node-plugins ${MUNIN_PLUGINS}
+
+echo "* Cleanup home/admin because of delegate dataset usage"
+rm -rf /home/admin/.[^.]*
+
+# Clean up
+echo "* Cleaning up."
+rm -rf /root/*
+
+# Provide workaround for /.zonecontrol/metadata.sock issue
+# https://github.com/joyent/smtools/issues/3
+gsed -i 's:^rm -f /.zonecontrol/metadata.sock$:rm -f /.zonecontrol/metadata.sock || true:g' \
+	/opt/local/bin/sm-prepare-image
+
+# not needed?
+# Exit if any commands fail
+#set -o errexit
+
+# Prepare image for provisioning
+sm-prepare-image -y

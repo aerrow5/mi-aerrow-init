@@ -1,0 +1,15 @@
+{
+  "name":         "aerrow-base",
+  "version":      "17.3.0",
+  "description":  "base server",
+  "organization": "Artned",
+  "brand":        "Artned",
+  "homepage":     "http://www.artned.org/",
+	"customer_metadata": {
+	"mail_smarthost":       {"type": "text", "description": "hostname of remote smtp server"},
+	"mail_auth_user":       {"type": "text", "description": "smtp username if authentication is required"},
+	"mail_auth_pass":       {"type": "text", "description": "smtp password"},
+	"mail_adminaddr":       {"type": "text", "description": "admin email address alias for all mails to root@localhost"},
+	"munin_master_allow":   {"type": "text", "description": "ip addresses (alternative hostname) of the munin master node"}
+	}
+}

@@ -1,0 +1,7 @@
+name="aerrowb-base"
+organization="Artned"
+brand="Instance"
+version="17.3.0"
+description="base server"
+homepage="http://www.artned.org"
+users="root admin"

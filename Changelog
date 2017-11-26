@@ -1,0 +1,5 @@
+# Changelog for mi-aerrow-fileserv
+
+v17.3.0
+* Initial design, based on base64 17.3.0 + skylime/mi-core-base
+

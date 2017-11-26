@@ -1,0 +1,29 @@
+# List packages to add to your image one per line.
+# dont like vim
+nano
+# munin-node
+https://pkgsrc.smartos.skylime.net/skylime-extra/2017Q2/x86_64/munin-common-2.0.30.tgz
+https://pkgsrc.smartos.skylime.net/skylime-extra/2017Q2/x86_64/munin-node-2.0.30.tgz
+p5-Net-CIDR
+p5-LWP-UserAgent-Determined
+p5-Switch
+# nullmailer
+https://pkgsrc.smartos.skylime.net/skylime-extra/2017Q2/x86_64/nullmailer-2.0.tgz
+# additional tools
+diffutils
+htop
+logcheck
+# transport:
+curl
+wget
+# other:
+grep
+gsed
+sudo
+# colorlog + remote logging
+ccze
+rsyslog
+# spiped
+spiped
+# dtrace
+dtracetools
