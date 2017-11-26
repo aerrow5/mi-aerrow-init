@@ -27,10 +27,11 @@ MUNIN_PLUGINS="
 "
 
 echo "* Use the skylime pkgsrc mirror"
-gsed -i 's:pkgsrc.joyent.com:pkgsrc.smartos.skylime.net:g' /opt/local/etc/pkgin/repositories.conf
-gsed -i 's:pkgsrc.joyent.com:pkgsrc.smartos.skylime.net:g' /opt/local/etc/pkg_install.conf
-pkg_admin rebuild
-pkgin -y up
+### manually to be run on setup of init server
+### gsed -i 's:pkgsrc.joyent.com:pkgsrc.smartos.skylime.net:g' /opt/local/etc/pkgin/repositories.conf
+### gsed -i 's:pkgsrc.joyent.com:pkgsrc.smartos.skylime.net:g' /opt/local/etc/pkg_install.conf
+### pkg_admin rebuild
+### pkgin -y up
 
 ## MUNIN
 echo "* Create munin template file that will be used during mdata setup"
@@ -40,7 +41,7 @@ echo "* Download and install community munin plugins (overwrite all other plugin
 curl -L https://github.com/drscream/smartos-munin-plugins/archive/v${MUNIN_PLUGIN_VERSION}.tar.gz | gtar xz -C /opt/local/lib/munin/plugins --strip-components=1
 
 echo "* Activate munin plugins"
-/opt/core/bin/munin-node-plugins ${MUNIN_PLUGINS}
+/opt/local/bin/munin-node-plugins ${MUNIN_PLUGINS}
 
 echo "* Cleanup home/admin because of delegate dataset usage"
 rm -rf /home/admin/.[^.]*
