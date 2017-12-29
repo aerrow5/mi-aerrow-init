@@ -30,8 +30,10 @@ echo "* Use the skylime pkgsrc mirror"
 ### manually to be run on setup of init server
 ### gsed -i 's:pkgsrc.joyent.com:pkgsrc.smartos.skylime.net:g' /opt/local/etc/pkgin/repositories.conf
 ### gsed -i 's:pkgsrc.joyent.com:pkgsrc.smartos.skylime.net:g' /opt/local/etc/pkg_install.conf
-### pkg_admin rebuild
-### pkgin -y up
+
+### update pkg info:
+pkg_admin rebuild
+pkgin -y up
 
 ## MUNIN
 echo "* Create munin template file that will be used during mdata setup"
