@@ -1,7 +1,7 @@
 name="aerrowb-init"
 organization="Artned"
 brand="Instance"
-version="17.3.0"
+version="17.4.0"
 description="base server"
 homepage="http://www.artned.org"
 users="root admin"

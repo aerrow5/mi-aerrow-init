@@ -1,5 +1,8 @@
 # Changelog for mi-aerrow-init
 
+v17.4.0
+* Bump to version 17.4.0 based on base64-LTS 17.4.0
+
 v17.3.0
 * Initial design, based on base64 17.3.0 + skylime/mi-core-base
 
